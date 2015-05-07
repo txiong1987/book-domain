@@ -14,8 +14,19 @@ buildscript {
     }
 }
 
-group = 'common-book'
-version = '0.1'
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+            repoKey = "libs-releases-local"
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+    }
+}
+
+group = 'test'
+version = '0.8'
 
 repositories {
     mavenCentral()

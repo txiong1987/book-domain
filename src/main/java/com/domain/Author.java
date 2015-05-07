@@ -1,9 +1,11 @@
 package com.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 /**
@@ -28,12 +30,9 @@ public class Author {
     @JsonProperty("lastName")
     private String lastName;
 
-    @Column(name = "book_id")
-    @JsonProperty("bookId")
-    private Long bookId;
-
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "author")
+    @JsonManagedReference("authorBook")
+    @ApiModelProperty(hidden = true)
     private List<Book> books;
 
     public Long getId() {
@@ -58,14 +57,6 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
     }
 
     public List<Book> getBooks() {

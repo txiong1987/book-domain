@@ -1,13 +1,14 @@
 CREATE TABLE author (
   id BIGSERIAL PRIMARY KEY,
   first_name VARCHAR(100),
-  last_name VARCHAR(200),
-  book_id BIGINT,
+  last_name VARCHAR(200)
 
-  FOREIGN KEY (book_id) REFERENCES book(id)
 );
 
 CREATE TABLE book (
   id BIGSERIAL PRIMARY KEY,
-  title VARCHAR(100)
+  title VARCHAR(100),
+  author_id BIGINT,
+  
+    FOREIGN KEY (author_id) REFERENCES author(id)
 );
